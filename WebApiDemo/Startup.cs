@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebApiDemo.DataAccess;
+using WebApiDemo.Formatters;
 
 namespace WebApiDemo
 {
@@ -27,7 +28,10 @@ namespace WebApiDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductDal,EfProductDal>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc(options=> 
+            {
+                options.OutputFormatters.Add(new VcardOutputFormatter());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
