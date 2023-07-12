@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -47,6 +48,8 @@ namespace WebApiDemo
             }
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<AuthenticationMiddleware>();
             app.UseMvc(config =>
             {
                 //config.MapRoute("DefaultRoute", "api/{controller}/{action}");
