@@ -19,6 +19,12 @@ namespace WebApiDemo.CustomMiddlewares
         {
             string authHeader = context.Request.Headers["Authorization"];
 
+            if (authHeader==null)
+            {
+                await _next(context);
+                return;
+            }
+
             if (authHeader != null && authHeader.StartsWith("basic", StringComparison.OrdinalIgnoreCase))
             {
                 var token = authHeader.Substring(6).Trim();
