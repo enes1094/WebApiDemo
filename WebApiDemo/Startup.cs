@@ -41,7 +41,10 @@ namespace WebApiDemo
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseMvc(config =>
+            {
+                //config.MapRoute("DefaultRoute", "api/{controller}/{action}");
+            });
         }
     }
 }
